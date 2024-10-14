@@ -3,7 +3,7 @@
     "name": "waniKaniContextSentenceHider",
     "version": "1.0",
   
-    "description": "Adds a red border to all webpages matching mozilla.org.",
+    "description": "Adds ability to hide context sentences in waniKani",
   
     "content_scripts": [
       {
