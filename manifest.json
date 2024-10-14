@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "waniKaniContextSentenceHider",
+    "version": "1.0",
+  
+    "description": "Adds a red border to all webpages matching mozilla.org.",
+  
+    "content_scripts": [
+      {
+        "matches": ["https://www.wanikani.com/*"],
+        "js": ["/contextSentenceHider.js"]
+      }
+    ]
+  }
+  
