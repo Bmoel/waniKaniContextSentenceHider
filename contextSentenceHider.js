@@ -28,22 +28,23 @@ function findContextSentences() {
 
 function manipulateEnglishText(parentDiv) {
     const hiderClassName = 'extensionContextSentenceHider';
-    const englishText = parentDiv.children[1];
-    if (!englishText || englishText.classList.contains(hiderClassName)) {
+    const englishTextElement = parentDiv.children[1];
+    if (!englishTextElement || englishTextElement.classList.contains(hiderClassName)) {
         return;
     }
-    englishText.setAttribute('style', blurStyles);
-    addOnClickFunctionalityToEnglishText(englishText);
-    englishText.classList.add(hiderClassName);
+    englishTextElement.setAttribute('style', blurStyles);
+    addOnClickFunctionalityToEnglishText(englishTextElement);
+    englishTextElement.classList.add(hiderClassName);
 };
 
 function addOnClickFunctionalityToEnglishText(englishText) {
     englishText.addEventListener('click', (event) => {
-        const currentStyle = event.target.getAttribute('style');
+        const englishTextElement = event.target;
+        const currentStyle = englishTextElement.getAttribute('style');
         if (!currentStyle) {
-            event.target.setAttribute('style', blurStyles);
+            englishTextElement.setAttribute('style', blurStyles);
         } else {
-            event.target.removeAttribute('style');
+            englishTextElement.removeAttribute('style');
         }
     })
 };
