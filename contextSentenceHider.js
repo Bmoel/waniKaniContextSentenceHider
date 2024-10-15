@@ -6,30 +6,23 @@ var observer = new MutationObserver(() => {
 observer.observe(document, { childList: true, subtree: true });
 
 function findContextSentences() {
+    // Find elements for Vocabulary pages
     const allH3Elements = document.querySelectorAll('h3');
     for (const h3Element of allH3Elements) {
         const innerText = h3Element.innerText.toLowerCase();
-        if (innerText !== 'context sentences') {
+        if (innerText !== 'context sentences' || !h3Element.parentElement) {
             continue
         }
-
-        const parent = h3Element.parentElement;
-        if (!parent) {
-            continue;
+        const contextSentenceChildren = h3Element.parentElement.children;
+        for (const contextSentenceDiv of contextSentenceChildren) {
+            manipulateEnglishText(contextSentenceDiv);
         }
-        addBlurLogicToContextSentences(parent);
     }
 
+    // Find elements for Today's Lessons
     const contextSentenceElements = document.getElementsByClassName('context-sentences');
     for (const parentDiv of contextSentenceElements) {
         manipulateEnglishText(parentDiv);
-    }
-};
-
-function addBlurLogicToContextSentences(contextSentencesParent) {
-    const contextSentenceChildren = contextSentencesParent.children;
-    for (const contextSentenceDiv of contextSentenceChildren) {
-        manipulateEnglishText(contextSentenceDiv);
     }
 };
 
@@ -43,16 +36,12 @@ function manipulateEnglishText(parentDiv) {
 };
 
 function addOnClickFunctionalityToEnglishText(englishText) {
-    if (typeof englishText.onClick === 'function') {
-        return
-    }
-
-    englishText.addEventListener('click', () => {
-        const currentStyle = englishText.getAttribute('style');
+    englishText.addEventListener('click', (event) => {
+        const currentStyle = event.target.getAttribute('style');
         if (!currentStyle) {
-            englishText.setAttribute('style', blurStyles);
+            event.target.setAttribute('style', blurStyles);
         } else {
-            englishText.removeAttribute('style');
+            event.target.removeAttribute('style');
         }
     })
 };
