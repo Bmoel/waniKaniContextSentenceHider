@@ -27,12 +27,14 @@ function findContextSentences() {
 };
 
 function manipulateEnglishText(parentDiv) {
+    const hiderClassName = 'extensionContextSentenceHider';
     const englishText = parentDiv.children[1];
-    if (!englishText) {
+    if (!englishText || englishText.classList.contains(hiderClassName)) {
         return;
     }
     englishText.setAttribute('style', blurStyles);
     addOnClickFunctionalityToEnglishText(englishText);
+    englishText.classList.add(hiderClassName);
 };
 
 function addOnClickFunctionalityToEnglishText(englishText) {
