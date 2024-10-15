@@ -11,7 +11,7 @@ function findContextSentences() {
     for (const h3Element of allH3Elements) {
         const innerText = h3Element.innerText.toLowerCase();
         if (innerText !== 'context sentences' || !h3Element.parentElement) {
-            continue
+            continue;
         }
         const contextSentenceChildren = h3Element.parentElement.children;
         for (const contextSentenceDiv of contextSentenceChildren) {
