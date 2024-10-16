@@ -2,9 +2,7 @@
     "manifest_version": 2,
     "name": "WaniKani Context Sentence Hider",
     "version": "1.0",
-  
-    "description": "Adds ability to hide context sentences in waniKani",
-  
+    "description": "Adds ability to hide context sentences in Wani Kani Lessons",
     "content_scripts": [
       {
         "matches": ["https://www.wanikani.com/*"],
