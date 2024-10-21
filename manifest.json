@@ -6,7 +6,7 @@
     "content_scripts": [
       {
         "matches": ["https://www.wanikani.com/*"],
-        "js": ["/contextSentenceHider.js"],
+        "js": ["js/contextSentenceHider.js"],
         "run_at": "document_start"
       }
     ]
