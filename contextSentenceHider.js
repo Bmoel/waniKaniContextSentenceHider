@@ -1,4 +1,5 @@
-const blurStyle = "filter: blur(4px);";
+const HIDER_CLASS_NAME = 'extensionContextSentenceHider';
+const BLUR_STYLE = "filter: blur(4px);";
 
 const observer = new MutationObserver(() => {
     findContextSentences();
@@ -13,21 +14,26 @@ function findContextSentences() {
 };
 
 function manipulateEnglishText(parentDiv) {
-    const hiderClassName = 'extensionContextSentenceHider';
     const englishTextElement = parentDiv.children[1];
-    if (!englishTextElement || englishTextElement.classList.contains(hiderClassName)) {
+    if (!englishTextElement || elementWasAlreadyManipulated(englishTextElement)) {
         return;
     }
-    englishTextElement.setAttribute('style', blurStyle);
+    englishTextElement.setAttribute('style', BLUR_STYLE);
     englishTextElement.addEventListener('click', onManipulatedTextClick);
-    englishTextElement.classList.add(hiderClassName);
+    englishTextElement.classList.add(HIDER_CLASS_NAME);
+};
+
+function elementWasAlreadyManipulated(englishTextElement) {
+    const hasClassName = englishTextElement.classList.contains(HIDER_CLASS_NAME);
+    const hasOnClick = typeof englishTextElement.onclick === 'function';
+    return hasClassName || hasOnClick;
 };
 
 function onManipulatedTextClick(event) {
     const englishTextElement = event.target;
     const currentStyle = englishTextElement.getAttribute('style');
     if (!currentStyle) {
-        englishTextElement.setAttribute('style', blurStyle);
+        englishTextElement.setAttribute('style', BLUR_STYLE);
     } else {
         englishTextElement.removeAttribute('style');
     }
