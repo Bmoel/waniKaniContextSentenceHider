@@ -1,6 +1,6 @@
 const blurStyle = "filter: blur(4px);";
 
-var observer = new MutationObserver(() => {
+const observer = new MutationObserver(() => {
     findContextSentences();
 });
 observer.observe(document, { childList: true, subtree: true });
@@ -19,18 +19,16 @@ function manipulateEnglishText(parentDiv) {
         return;
     }
     englishTextElement.setAttribute('style', blurStyle);
-    addOnClickFunctionalityToEnglishText(englishTextElement);
+    englishTextElement.addEventListener('click', onManipulatedTextClick);
     englishTextElement.classList.add(hiderClassName);
 };
 
-function addOnClickFunctionalityToEnglishText(englishText) {
-    englishText.addEventListener('click', (event) => {
-        const englishTextElement = event.target;
-        const currentStyle = englishTextElement.getAttribute('style');
-        if (!currentStyle) {
-            englishTextElement.setAttribute('style', blurStyle);
-        } else {
-            englishTextElement.removeAttribute('style');
-        }
-    })
+function onManipulatedTextClick(event) {
+    const englishTextElement = event.target;
+    const currentStyle = englishTextElement.getAttribute('style');
+    if (!currentStyle) {
+        englishTextElement.setAttribute('style', blurStyle);
+    } else {
+        englishTextElement.removeAttribute('style');
+    }
 };
