@@ -8,13 +8,13 @@ observer.observe(document, { childList: true, subtree: true });
 
 function findContextSentences() {
     const contextSentenceElements = document.getElementsByClassName('context-sentences');
-    for (const parentDiv of contextSentenceElements) {
-        manipulateEnglishText(parentDiv);
+    for (const contextSentence of contextSentenceElements) {
+        manipulateEnglishText(contextSentence);
     }
 };
 
-function manipulateEnglishText(parentDiv) {
-    const englishTextElement = parentDiv.children[1];
+function manipulateEnglishText(contextSetenceDivElement) {
+    const englishTextElement = contextSetenceDivElement.children[1];
     if (!englishTextElement || elementWasAlreadyManipulated(englishTextElement)) {
         return;
     }
